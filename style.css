@@ -5,191 +5,301 @@
 }
 
 body {
+    width: 100%;
     height: 100vh;
     overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 45%, #16233d 0%, #080d18 38%, #020308 75%);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* START */
+
+.start-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     background:
-        radial-gradient(circle at center, #18243b 0%, #05070d 55%, #000 100%);
+        radial-gradient(circle, #101d35 0%, #020308 70%);
 
-    color: white;
-
-    font-family: Arial, sans-serif;
+    z-index: 20;
 }
+
+.start-screen h1 {
+    font-size: clamp(24px, 5vw, 48px);
+    letter-spacing: 5px;
+    font-weight: 300;
+
+    color: #dcecff;
+
+    text-shadow:
+        0 0 15px #3978c8,
+        0 0 35px rgba(57,120,200,.5);
+}
+
+button {
+    margin-top: 35px;
+
+    padding: 15px 38px;
+
+    border: 1px solid #c8a95b;
+    border-radius: 40px;
+
+    background: rgba(5,10,20,.8);
+
+    color: #f5d98b;
+
+    font-size: 15px;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 15px rgba(200,169,91,.3);
+
+    transition: .35s;
+}
+
+button:hover {
+    transform: scale(1.06);
+
+    box-shadow:
+        0 0 30px rgba(200,169,91,.6);
+}
+
 
 /* COUNTDOWN */
 
 .countdown {
-    position: absolute;
+    position: fixed;
 
     top: 50%;
     left: 50%;
 
     transform: translate(-50%, -50%);
 
-    font-size: 120px;
-    font-weight: 700;
+    font-size: clamp(110px, 22vw, 240px);
 
-    letter-spacing: 5px;
+    font-weight: 600;
+
+    color: #e9f3ff;
 
     text-shadow:
-        0 0 20px #ffffff,
-        0 0 50px #5ca9ff;
+        0 0 15px #5ba8ff,
+        0 0 45px #347ed1,
+        0 0 100px rgba(52,126,209,.5);
 
-    transition: transform 0.3s ease;
+    display: none;
+
+    z-index: 10;
 }
 
-/* FINAL SCREEN */
+
+/* CELEBRATION */
 
 .celebration {
-    position: absolute;
+    position: fixed;
+    inset: 0;
 
-    width: 100%;
-    height: 100%;
+    display: none;
 
-    display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
 
     text-align: center;
 
-    opacity: 0;
-    visibility: hidden;
+    background:
+        radial-gradient(circle at center,
+        rgba(24,45,80,.7),
+        rgba(2,3,8,.95) 70%);
+
+    z-index: 5;
 }
 
-/* MAIN TEXT */
-
 .celebration h1 {
-    font-size: clamp(38px, 8vw, 90px);
+    font-size: clamp(38px, 8vw, 88px);
 
-    letter-spacing: 8px;
+    letter-spacing: 10px;
 
-    background: linear-gradient(
-        90deg,
-        #ffffff,
-        #62b0ff,
-        #ffffff
-    );
+    font-weight: 500;
 
-    -webkit-background-clip: text;
-    color: transparent;
+    color: #f1f5ff;
 
-    text-shadow: 0 0 30px rgba(100,180,255,0.5);
+    text-shadow:
+        0 0 15px #7dbdff,
+        0 0 40px rgba(72,145,235,.7);
+
+    animation: titleIn 1.2s ease;
 }
 
 .celebration h2 {
-    margin-top: 10px;
+    margin-top: 12px;
 
-    font-size: clamp(35px, 7vw, 70px);
+    font-size: clamp(55px, 11vw, 115px);
 
-    letter-spacing: 12px;
+    letter-spacing: 16px;
 
-    color: #ffffff;
+    color: #e8c66a;
+
+    text-shadow:
+        0 0 12px #e8c66a,
+        0 0 35px rgba(232,198,106,.7),
+        0 0 70px rgba(232,198,106,.35);
+
+    animation: nameIn 1.4s ease;
 }
 
 .celebration p {
     margin-top: 25px;
 
-    max-width: 500px;
-
-    padding: 0 20px;
-
-    color: #aeb8c8;
+    color: #aebbd0;
 
     font-size: 17px;
 
-    line-height: 1.7;
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+
+    animation: fadeIn 2s ease;
 }
 
-/* SHOW CELEBRATION */
+.small-text {
+    margin-top: 25px;
 
-.celebration.show {
-    opacity: 1;
-    visibility: visible;
+    color: #7288a8;
 
-    animation: appear 1.2s ease;
+    letter-spacing: 4px;
+
+    font-size: 13px;
 }
 
-/* PARTICLE BURST */
 
-.burst {
+/* PARTICLES */
+
+.fireworks::before,
+.fireworks::after {
+    content: "";
+
     position: absolute;
 
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
+    top: 50%;
+    left: 50%;
+
     box-shadow:
-        0 -180px #ff4d6d,
-        60px -160px #ffd166,
-        120px -110px #06d6a0,
-        170px -40px #4cc9f0,
-        160px 50px #f72585,
-        100px 130px #ffd166,
-        0 180px #06d6a0,
-        -100px 130px #4cc9f0,
-        -160px 50px #ff4d6d,
-        -170px -40px #ffd166,
-        -120px -110px #06d6a0,
-        -60px -160px #f72585;
+        0 -250px #4ca3ff,
+        80px -210px #e8c66a,
+        150px -150px #6d5dfc,
+        210px -60px #4ca3ff,
+        240px 0 #e8c66a,
+        190px 90px #6d5dfc,
+        110px 170px #4ca3ff,
+        0 240px #e8c66a,
+        -110px 170px #4ca3ff,
+        -190px 90px #6d5dfc,
+        -240px 0 #e8c66a,
+        -210px -60px #4ca3ff,
+        -150px -150px #6d5dfc,
+        -80px -210px #e8c66a;
 
-    opacity: 0;
-
-    animation: burst 1.8s ease-out forwards;
+    animation: explosion 2s ease-out infinite;
 }
 
-/* ANIMATIONS */
+.fireworks::after {
+    animation-delay: 1s;
+}
 
-@keyframes burst {
 
+/* ANIMATION */
+
+@keyframes explosion {
     0% {
-        transform: scale(0);
+        transform: scale(.1);
         opacity: 1;
     }
 
     100% {
-        transform: scale(2);
+        transform: scale(1.5);
         opacity: 0;
     }
 }
 
-@keyframes appear {
-
-    0% {
-        transform: scale(0.3);
+@keyframes titleIn {
+    from {
         opacity: 0;
+        transform: translateY(30px);
+        letter-spacing: 25px;
     }
 
-    60% {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 10px;
+    }
+}
+
+@keyframes nameIn {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    70% {
         transform: scale(1.08);
-        opacity: 1;
     }
 
-    100% {
+    to {
+        opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
         opacity: 1;
     }
 }
 
-/* MOBILE */
+@keyframes zoom {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(8);
+        opacity: 0;
+    }
+}
+
 
 @media (max-width: 600px) {
 
-    .countdown {
-        font-size: 90px;
-    }
-
     .celebration h1 {
-        letter-spacing: 4px;
+        letter-spacing: 5px;
     }
 
     .celebration h2 {
-        letter-spacing: 7px;
+        letter-spacing: 9px;
     }
 
     .celebration p {
+        padding: 0 25px;
         font-size: 15px;
     }
 }
